@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBMC Student Enrollment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, skyblue, lightblue);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        header img {
+            height: 45px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .search-bar {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-bar input {
+            padding: 8px 12px;
+            width: 220px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .search-bar button {
+            padding: 8px 16px;
+            background: #4a6fff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background: #3a5fff;
+        }
+        
+        .main {
+            background-image: url('https://images.squarespace-cdn.com/content/v1/664c7ae50eea9c731b37e817/f578b9d4-3fe9-490a-a9ca-969578cf06bb/O.B.+Montessori+Center+Program+-+Grade+School+Primary');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 30px;
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+        }
+        
+        .main-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            width: 90px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 38px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .main p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .form-container {
+            max-width: 850px;
+            margin: 40px auto;
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 35px;
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e0e0e0;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #4a6fff;
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+            color: #444;
+            font-size: 15px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4a6fff;
+            box-shadow: 0 0 0 2px rgba(74, 111, 255, 0.2);
+        }
+        
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder {
+            color: #888;
+        }
+        
+        .row {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .row > div {
+            flex: 1;
+        }
+        
+        .checkbox-group {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #4a6fff;
+        }
+        
+        .checkbox-group label {
+            display: inline-block;
+            margin-top: 0;
+            margin-right: 25px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .checkbox-group input[type="radio"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        button[type="submit"] {
+            background: linear-gradient(to right, #4a6fff, #3a5fff);
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            display: block;
+            margin: 40px auto 0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(74, 111, 255, 0.3);
+            font-weight: bold;
+        }
+        
+        button[type="submit"]:hover {
+            background: linear-gradient(to right, #3a5fff, #2a4fff);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 111, 255, 0.4);
+        }
+        
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 0 0 8px 8px;
+            font-size: 15px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .search-bar input {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 30px;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+        }
+        
+        /* Add some spacing for better readability */
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        /* Style the required fields */
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <div class="main-content">
+            <h1>OBMC Student Enrollment Form</h1>
+            <p>Fill out the form below to enroll for the upcoming school year.</p>
+            <p>Complete all required fields and press submit.</p>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form id="enrollmentForm">
+            <div class="form-section">
+                <h2>Student Information</h2>
+                <div class="row">
+                    <div>
+                        <label for="firstName" class="required">First Name</label>
+                        <input type="text" id="firstName" placeholder="Max" required>
+                    </div>
+                    <div>
+                        <label for="lastName" class="required">Last Name</label>
+                        <input type="text" id="lastName" placeholder="Verstappen" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <label for="birthDate" class="required">Birth Date</label>
+                        <input type="date" id="birthDate" required>
+                    </div>
+                    <div>
+                        <label for="gender" class="required">Gender</label>
+                        <select id="gender" required>
+                            <option value="">Select...</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="gradeLevel" class="required">Grade Level</label>
+                        <select id="gradeLevel" required>
+                            <option value="">Select...</option>
+                            <option>Grade 1</option>
+                            <option>Grade 2</option>
+                            <option>Grade 3</option>
+                            
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Contact Details</h2>
+                <label for="email" class="required">Email Address</label>
+                <input type="email" id="email" placeholder="student@example.com" required>
+
+                <label for="contactNumber" class="required">Contact Number</label>
+                <input type="tel" id="contactNumber" placeholder="0912-345-6789" required>
+            </div>
+
+            <div class="form-section">
+                <h2>Other Information</h2>
+                <div class="checkbox-group">
+                    <label class="required">Mode of Learning</label><br>
+                    <input type="radio" name="mode" id="online" value="online" required>
+                    <label for="online">Online</label>
+                    <input type="radio" name="mode" id="face" value="face-to-face">
+                    <label for="face">Face to faace</label>
+                    <input type="radio" name="mode" id="hybrid" value="online" required>
+                    <label for="online">Hybrid (both Online and Face to face</label>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 6px;">
+                    <input type="checkbox" id="confirm" required>
+                    <label for="confirm" style="display: inline; margin-top: 0;" class="required">
+                        I confirm that the information is correct.
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+
+    <footer>
+        © 2025 Student Enrollment Form | OB Montessori
+    </footer>
+
+</body>
+</html>
